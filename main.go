@@ -5,39 +5,8 @@ import (
 	"log"
 
 	"github.com/faiface/pixel"
-	"github.com/faiface/pixel/imdraw"
 	"github.com/faiface/pixel/pixelgl"
 )
-
-type Snake struct {
-	// (x, y) position default is (0, 0)
-	x, y float64
-
-	// (x, y) speed default is (1, 0)
-	xs, ys float64
-
-	imd *imdraw.IMDraw
-}
-
-func (s *Snake) Update() {
-	s.x = s.x + s.xs
-	s.y = s.y + s.ys
-}
-
-func (s *Snake) Show(win pixel.Target) {
-	s.imd.Clear()
-	s.imd.SetMatrix(pixel.IM.Moved(pixel.V(s.x, s.y)))
-	s.imd.Push(pixel.V(0, 0), pixel.V(10, 10))
-	s.imd.Rectangle(0)
-	s.imd.Draw(win)
-}
-
-func NewSnake() *Snake {
-	return &Snake{
-		xs:  1,
-		imd: imdraw.New(nil),
-	}
-}
 
 func main() {
 	pixelgl.Run(run)
@@ -52,12 +21,25 @@ func run() {
 		log.Fatal(err)
 	}
 
-	snake := NewSnake()
+	snake := NewSnake(win)
 
 	for !win.Closed() {
+		handleInput(win, snake)
 		win.Clear(color.Gray{51})
 		snake.Update()
 		snake.Show(win)
 		win.Update()
+	}
+}
+
+func handleInput(win *pixelgl.Window, snake *Snake) {
+	if win.JustPressed(pixelgl.KeyLeft) {
+		snake.SetDirection(-1, 0)
+	} else if win.JustPressed(pixelgl.KeyRight) {
+		snake.SetDirection(1, 0)
+	} else if win.JustPressed(pixelgl.KeyUp) {
+		snake.SetDirection(0, 1)
+	} else if win.JustPressed(pixelgl.KeyDown) {
+		snake.SetDirection(0, -1)
 	}
 }
