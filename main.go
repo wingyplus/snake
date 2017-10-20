@@ -19,6 +19,7 @@ func main() {
 }
 
 const (
+	fps    = 10
 	scale  = 20
 	width  = 600
 	height = 600
@@ -52,6 +53,8 @@ func run() {
 		}
 
 		win.Update()
+
+		time.Sleep(time.Second / fps)
 	}
 }
 

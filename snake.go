@@ -25,9 +25,8 @@ func (s *Snake) SetDirection(x, y float64) {
 }
 
 func (s *Snake) Update() {
-	// NOTE: add 0.01 to slow moving down
-	s.x = s.x + s.xs*s.scale*0.03
-	s.y = s.y + s.ys*s.scale*0.03
+	s.x = s.x + s.xs*s.scale
+	s.y = s.y + s.ys*s.scale
 
 	wx, wy := s.win.Bounds().Max.XY()
 
