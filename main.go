@@ -45,6 +45,12 @@ func run() {
 		snake.Show(win)
 		food.Update()
 		food.Show(win)
+
+		if snake.Eat(food) {
+			x, y = pickLocation()
+			food.SetLocation(x, y)
+		}
+
 		win.Update()
 	}
 }

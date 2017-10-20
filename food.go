@@ -28,6 +28,10 @@ func (f *Food) SetLocation(x, y float64) {
 	f.y = y
 }
 
+func (f *Food) Pos() (x, y float64) {
+	return f.x, f.y
+}
+
 func NewFood(scale float64) *Food {
 	return &Food{
 		scale: scale,

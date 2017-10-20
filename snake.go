@@ -43,6 +43,17 @@ func (s *Snake) Show(win pixel.Target) {
 	s.imd.Draw(win)
 }
 
+func (s *Snake) Pos() (x, y float64) {
+	return s.x, s.y
+}
+
+func (s *Snake) Eat(food *Food) bool {
+	fx, fy := food.Pos()
+	sx, sy := s.Pos()
+	d := mathutil.Dist(sx, sy, fx, fy)
+	return d < 1
+}
+
 func NewSnake(scale float64, win *pixelgl.Window) *Snake {
 	return &Snake{
 		xs:    1,
