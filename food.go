@@ -23,10 +23,13 @@ func (f *Food) Show(win pixel.Target) {
 	f.imd.Draw(win)
 }
 
-func NewFood(x, y, scale float64) *Food {
+func (f *Food) SetLocation(x, y float64) {
+	f.x = x
+	f.y = y
+}
+
+func NewFood(scale float64) *Food {
 	return &Food{
-		x:     x,
-		y:     y,
 		scale: scale,
 		imd:   imdraw.New(nil),
 	}

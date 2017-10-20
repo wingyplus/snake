@@ -18,19 +18,24 @@ func main() {
 	pixelgl.Run(run)
 }
 
-const scale = 20
+const (
+	scale  = 20
+	width  = 600
+	height = 600
+)
 
 func run() {
 	win, err := pixelgl.NewWindow(pixelgl.WindowConfig{
 		Title:  "The Snake Game",
-		Bounds: pixel.R(0, 0, 600, 600),
+		Bounds: pixel.R(0, 0, width, height),
 	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	x, y := randPositionXY()
-	food := NewFood(x, y, scale)
+	x, y := pickLocation()
+	food := NewFood(scale)
+	food.SetLocation(x, y)
 	snake := NewSnake(scale, win)
 
 	for !win.Closed() {
@@ -56,8 +61,10 @@ func handleInput(win *pixelgl.Window, snake *Snake) {
 	}
 }
 
-func randPositionXY() (x, y float64) {
-	x = float64(rand.Intn(600))
-	y = float64(rand.Intn(600))
+func pickLocation() (x, y float64) {
+	vec := pixel.V(float64(rand.Intn(width/scale)), float64(rand.Intn(height/scale)))
+	vec = vec.ScaledXY(pixel.V(scale, scale))
+	x = vec.X()
+	y = vec.Y()
 	return
 }
