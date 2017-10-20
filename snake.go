@@ -43,10 +43,10 @@ func (s *Snake) Show(win pixel.Target) {
 	s.imd.Draw(win)
 }
 
-func NewSnake(win *pixelgl.Window) *Snake {
+func NewSnake(scale float64, win *pixelgl.Window) *Snake {
 	return &Snake{
 		xs:    1,
-		scale: 20,
+		scale: scale,
 		imd:   imdraw.New(nil),
 		win:   win,
 	}
