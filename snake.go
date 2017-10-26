@@ -4,7 +4,7 @@ import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/imdraw"
 	"github.com/faiface/pixel/pixelgl"
-	"github.com/wingyplus/codingchallenge/snake/mathutil"
+	"github.com/wingyplus/snake/mathutil"
 )
 
 type Snake struct {
