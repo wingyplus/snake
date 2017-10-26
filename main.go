@@ -73,7 +73,7 @@ func handleInput(win *pixelgl.Window, snake *Snake) {
 func pickLocation() (x, y float64) {
 	vec := pixel.V(float64(rand.Intn(width/scale)), float64(rand.Intn(height/scale)))
 	vec = vec.ScaledXY(pixel.V(scale, scale))
-	x = vec.X()
-	y = vec.Y()
+	x = vec.X
+	y = vec.Y
 	return
 }

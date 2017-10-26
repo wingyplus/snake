@@ -16,7 +16,7 @@ func (f *Food) Update() {}
 
 func (f *Food) Show(win pixel.Target) {
 	f.imd.Clear()
-	f.imd.Color(colornames.Red)
+	f.imd.Color = colornames.Red
 	f.imd.SetMatrix(pixel.IM.Moved(pixel.V(f.x, f.y)))
 	f.imd.Push(pixel.V(0, 0), pixel.V(f.scale, f.scale))
 	f.imd.Rectangle(0)
